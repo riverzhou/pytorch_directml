@@ -1,0 +1,5 @@
+torchtext==0.14.1
+dill==0.3.4
+tqdm
+iopath
+numpy
