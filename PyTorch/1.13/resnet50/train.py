@@ -28,9 +28,10 @@ def main():
     parser.add_argument('--device', type=str, default='dml', help='The device to use for training.')
     parser.add_argument('--save_model', action='store_true', help='Save the model state_dict to file')
     parser.add_argument('--trace', type=bool, default=False, help='Trace performance.')
+    parser.add_argument('--device_index', type=int, default=0, help='Device index.')
     args = parser.parse_args()
 
-    device = torch_directml.device(torch_directml.default_device()) if args.device == 'dml' else torch.device(args.device)
+    device = torch_directml.device(args.device_index) if args.device == 'dml' else torch.device(args.device)
     train(args.path, args.batch_size, args.epochs, args.learning_rate,
             args.momentum, args.weight_decay, device, 'resnet50', args.save_model, args.trace)
     
