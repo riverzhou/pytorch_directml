@@ -1,5 +1,5 @@
 import torch
-import torch_directml
+#import torch_directml
 from torch import nn
 from torch.utils import data
 from torch.utils.data import DataLoader

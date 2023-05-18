@@ -2,7 +2,7 @@
 # Copyright (c) Microsoft Corporation. All rights reserved.
 
 import torch
-import torch_directml
+#import torch_directml
 from torch import nn
 from torch.utils.data import DataLoader
 from torchvision import datasets

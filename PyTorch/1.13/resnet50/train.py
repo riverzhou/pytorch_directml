@@ -7,7 +7,7 @@ import os
 import pathlib
 
 import torch
-import torch_directml
+#import torch_directml
 
 import sys
 classification_folder = str(os.path.join(pathlib.Path(__file__).parent.parent.resolve(), 'classification'))
@@ -31,7 +31,8 @@ def main():
     parser.add_argument('--device_index', type=int, default=0, help='Device index.')
     args = parser.parse_args()
 
-    device = torch_directml.device(args.device_index) if args.device == 'dml' else torch.device(args.device)
+    #device = torch_directml.device(args.device_index) if args.device == 'dml' else torch.device(args.device)
+    device = torch.device(args.device)
     train(args.path, args.batch_size, args.epochs, args.learning_rate,
             args.momentum, args.weight_decay, device, 'resnet50', args.save_model, args.trace)
     
