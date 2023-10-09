@@ -17,8 +17,6 @@ import torch
 import torch.nn.functional as F
 import torch.optim as optim
 
-import torch_directml
-
 # from torchbenchmark.util.torchtext_legacy.field import Field
 # from torchbenchmark.util.torchtext_legacy.data import Dataset
 # from torchbenchmark.util.torchtext_legacy.iterator import BucketIterator
@@ -132,7 +130,7 @@ def train_epoch(model, training_data, optimizer, opt, device, smoothing):
         n_word_total += n_word
         n_word_correct += n_correct
         total_loss += loss.item()
-        break
+        #break
 
     loss_per_word = total_loss/n_word_total
     accuracy = n_word_correct/n_word_total
@@ -251,7 +249,7 @@ def train(model, training_data, validation_data, optimizer, device, opt):
                 log_vf.write('{epoch},{loss: 8.5f},{ppl: 8.5f},{accu:3.3f}\n'.format(
                     epoch=epoch_i, loss=valid_loss,
                     ppl=math.exp(min(valid_loss, 100)), accu=100*valid_accu))
-        break
+        #break
 
 def main():
     '''
@@ -306,11 +304,7 @@ def main():
               'Using smaller batch w/o longer warmup may cause '\
               'the warmup stage ends with only little data trained.')
 
-    if opt.use_dml:
-        import torch_directml
-        device = torch_directml.device(torch_directml.default_device())
-    else:
-        device = torch.device('cuda' if opt.cuda else 'cpu')
+    device = torch.device('cuda' if opt.cuda else 'cpu')
 
     #========= Loading Dataset =========#
 
@@ -356,6 +350,8 @@ def main():
     if opt.debug:
         o = transformer(*last_run)
         torch.save(o, opt.debug)
+
+    print('999')
 
 
 def prepare_dataloaders_from_bpe_files(opt, device):

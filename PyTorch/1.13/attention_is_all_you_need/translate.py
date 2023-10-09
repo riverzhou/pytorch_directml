@@ -98,11 +98,7 @@ def main():
 
     test_loader = Dataset(examples=data['test'], fields={'src': SRC, 'trg': TRG})
 
-    if opt.use_dml:
-        import torch_directml
-        device = torch_directml.device(torch_directml.default_device())
-    else:
-        device = torch.device('cuda' if opt.cuda else 'cpu')
+    device = torch.device('cuda' if opt.cuda else 'cpu')
     translator = Translator(
         model=load_model(opt, device),
         beam_size=opt.beam_size,

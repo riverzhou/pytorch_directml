@@ -3,7 +3,6 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import torch_directml
 from .Models import Transformer, get_pad_mask, get_subsequent_mask
 
 
@@ -106,7 +105,7 @@ class Translator(nn.Module):
                 eos_locs = gen_seq == trg_eos_idx   
                 # -- replace the eos with its position for the length penalty use
                 seq_lens, _ = self.len_map.masked_fill(~eos_locs, max_seq_len).to("cpu").min(1)
-                seq_lens = seq_lens.to(torch_directml.device(torch_directml.default_device()))
+                seq_lens = seq_lens.to(torch.device('cuda'))
                 # -- check if all beams contain eos
                 if (eos_locs.sum(1) > 0).sum(0).item() == beam_size:
                     # TODO: Try different terminate conditions.

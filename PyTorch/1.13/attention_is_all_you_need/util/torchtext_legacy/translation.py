@@ -79,10 +79,11 @@ class TranslationDataset(Dataset):
 class Multi30k(TranslationDataset):
     """The small-dataset WMT 2016 multimodal task, also known as Flickr30k"""
 
-    urls = ['http://www.quest.dcs.shef.ac.uk/wmt16_files_mmt/training.tar.gz',
-            'http://www.quest.dcs.shef.ac.uk/wmt16_files_mmt/validation.tar.gz',
-            'http://www.quest.dcs.shef.ac.uk/'
-            'wmt17_files_mmt/mmt_task1_test2016.tar.gz']
+    urls = ['https://raw.githubusercontent.com/neychev/small_DL_repo/master/datasets/Multi30k/training.tar.gz',
+            'https://raw.githubusercontent.com/neychev/small_DL_repo/master/datasets/Multi30k/validation.tar.gz',
+            #'https://raw.githubusercontent.com/neychev/small_DL_repo/master/datasets/Multi30k/mmt16_task1_test.tar.gz',
+            'https://raw.githubusercontent.com/neychev/small_DL_repo/master/datasets/Multi30k/mmt_task1_test2016.tar.gz'
+           ]
     name = 'multi30k'
     dirname = ''
 
