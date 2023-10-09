@@ -7,7 +7,6 @@ import os
 import pathlib
 
 import torch
-#import torch_directml
 
 import sys
 classification_folder = str(os.path.join(pathlib.Path(__file__).parent.parent.resolve(), 'classification'))
@@ -21,17 +20,16 @@ def main():
     parser = argparse.ArgumentParser(__doc__)
     parser.add_argument("--path", type=str, default="cifar-10-python", help="Path to cifar dataset.")
     parser.add_argument('--batch_size', type=int, default=32, metavar='N', help='Batch size to train with.')
-    parser.add_argument('--epochs', type=int, default=50, metavar='N', help='The number of epochs to train for.')
+    parser.add_argument('--epochs', type=int, default=10, metavar='N', help='The number of epochs to train for.')
     parser.add_argument('--learning_rate', type=float, default=0.001, metavar='LR', help='The learning rate.')
     parser.add_argument('--momentum', type=float, default=0.9, metavar='M', help='The percentage of past parameters to store.')
     parser.add_argument('--weight_decay', default=0.0001, type=float, help='The parameter to decay weights.')
-    parser.add_argument('--device', type=str, default='dml', help='The device to use for training.')
+    parser.add_argument('--device', type=str, default='cuda', help='The device to use for training.')
     parser.add_argument('--save_model', action='store_true', help='Save the model state_dict to file')
     parser.add_argument('--trace', type=bool, default=False, help='Trace performance.')
     parser.add_argument('--device_index', type=int, default=0, help='Device index.')
     args = parser.parse_args()
 
-    #device = torch_directml.device(args.device_index) if args.device == 'dml' else torch.device(args.device)
     device = torch.device(args.device)
     train(args.path, args.batch_size, args.epochs, args.learning_rate,
             args.momentum, args.weight_decay, device, 'resnet50', args.save_model, args.trace)
